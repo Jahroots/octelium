@@ -18,6 +18,7 @@ package components
 
 import (
 	"context"
+	"os"
 
 	"github.com/octelium/octelium/apis/main/corev1"
 	"github.com/octelium/octelium/cluster/common/components"
@@ -76,12 +77,32 @@ func getNocturneDeployment(o *CommonOpts) *appsv1.Deployment {
 								ret := []k8scorev1.EnvVar{
 									{
 										Name:  "OCTELIUM_REGION_NAME",
-										Value: o.Region.Metadata.Name,
+										Value: o.Region.Metada23s         Normal    Killing                pod/octelium-gwagent-d76sw                                      Container gwagent failed liveness probe, will be restartedta.Name,
 									},
 									{
 										Name:  "OCTELIUM_REGION_UID",
 										Value: o.Region.Metadata.Uid,
 									},
+								}
+
+								// Pass image configuration from Genesis environment
+								if registry := os.Getenv("OCTELIUM_REGISTRY"); registry != "" {
+									ret = append(ret, k8scorev1.EnvVar{
+										Name:  "OCTELIUM_REGISTRY",
+										Value: registry,
+									})
+								}
+								if imagePrefix := os.Getenv("OCTELIUM_IMAGE_PREFIX"); imagePrefix != "" {
+									ret = append(ret, k8scorev1.EnvVar{
+										Name:  "OCTELIUM_IMAGE_PREFIX",
+										Value: imagePrefix,
+									})
+								}
+								if version := os.Getenv("OCTELIUM_VERSION"); version != "" {
+									ret = append(ret, k8scorev1.EnvVar{
+										Name:  "OCTELIUM_VERSION",
+										Value: version,
+									})
 								}
 
 								if o.EnableSPIFFECSI {
