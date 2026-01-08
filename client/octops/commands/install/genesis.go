@@ -175,6 +175,26 @@ func GetGenesisPodSpec(domain, cmd, version, svcAccount string) corev1.PodSpec {
 						},
 					}
 
+					// Pass registry configuration to Genesis
+					if val := os.Getenv("OCTELIUM_REGISTRY"); val != "" {
+						ret = append(ret, corev1.EnvVar{
+							Name:  "OCTELIUM_REGISTRY",
+							Value: val,
+						})
+					}
+					if val := os.Getenv("OCTELIUM_IMAGE_PREFIX"); val != "" {
+						ret = append(ret, corev1.EnvVar{
+							Name:  "OCTELIUM_IMAGE_PREFIX",
+							Value: val,
+						})
+					}
+					if val := os.Getenv("OCTELIUM_VERSION"); val != "" {
+						ret = append(ret, corev1.EnvVar{
+							Name:  "OCTELIUM_VERSION",
+							Value: val,
+						})
+					}
+
 					if val := os.Getenv("OCTELIUM_SPIFFE_TRUST_DOMAIN"); val != "" {
 						ret = append(ret, corev1.EnvVar{
 							Name:  "OCTELIUM_SPIFFE_TRUST_DOMAIN",

@@ -21,11 +21,16 @@ import (
 
 var ImageRegistry = ""
 var ImageRegistryPrefix = ""
+var ImageVersion = ""
 
 var rgxSemVer = regexp.MustCompile(`^v[0-9]+\.[0-9]+\.[0-9]+$`)
 var rgxSemVer2 = regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+$`)
 
 func getImageVersion() string {
+	if ImageVersion != "" {
+		return ImageVersion
+	}
+
 	if GitTag != "" && rgxSemVer.MatchString(GitTag) {
 		return GitTag[1:]
 	}

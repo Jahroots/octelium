@@ -65,6 +65,20 @@ func (g *Genesis) RunInit(ctx context.Context, o *InitOpts) error {
 		o = &InitOpts{}
 	}
 
+	// Read image configuration from environment variables
+	if registry := os.Getenv("OCTELIUM_REGISTRY"); registry != "" {
+		ldflags.ImageRegistry = registry
+		zap.L().Debug("Using OCTELIUM_REGISTRY from environment", zap.String("registry", registry))
+	}
+	if imagePrefix := os.Getenv("OCTELIUM_IMAGE_PREFIX"); imagePrefix != "" {
+		ldflags.ImageRegistryPrefix = imagePrefix
+		zap.L().Debug("Using OCTELIUM_IMAGE_PREFIX from environment", zap.String("prefix", imagePrefix))
+	}
+	if version := os.Getenv("OCTELIUM_VERSION"); version != "" {
+		ldflags.ImageVersion = version
+		zap.L().Debug("Using OCTELIUM_VERSION from environment", zap.String("version", version))
+	}
+
 	if err := waitForNodesReadiness(ctx, g.k8sC); err != nil {
 		return err
 	}
