@@ -84,15 +84,22 @@ type server struct {
 	createdAt      time.Time
 	installedAt    time.Time
 	kubeConfigPath string
+	containerImage string
 }
 
 func initServer(ctx context.Context) (*server, error) {
+
+	containerImage := os.Getenv("OCTELIUM_CONTAINER_IMAGE")
+	if containerImage == "" {
+		containerImage = "ghcr.io/jahroots/octelium:0.0.3-arm64-test"
+	}
 
 	ret := &server{
 		domain:         "localhost",
 		t:              &CustomT{},
 		createdAt:      time.Now(),
 		kubeConfigPath: "/etc/rancher/k3s/k3s.yaml",
+		containerImage: containerImage,
 	}
 
 	u, err := user.Current()
@@ -1368,7 +1375,8 @@ func (s *server) runOcteliumContainer(ctx context.Context) error {
 	{
 		cmd := s.getCmd(ctx,
 			fmt.Sprintf(
-				"docker run --net host ghcr.io/octelium/octelium:main connect --domain %s --auth-token %s -p nginx:17001",
+				"docker run --net host %s connect --domain %s --auth-token %s -p nginx:17001",
+				s.containerImage,
 				s.domain,
 				res.GetAuthenticationToken().AuthenticationToken))
 		cmd.Stdout = os.Stdout

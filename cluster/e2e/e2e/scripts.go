@@ -31,6 +31,16 @@ const scriptInstall = `
 #!/usr/bin/env bash
 set -e
 
+ARCH_RAW="$(uname -m)"
+case "$ARCH_RAW" in
+  x86_64) K8S_ARCH="amd64" ;;
+  aarch64|arm64) K8S_ARCH="arm64" ;;
+  *)
+    echo "Unsupported architecture: $ARCH_RAW"
+    exit 1
+    ;;
+esac
+
 DOMAIN="localhost"
 VERSION=$GITHUB_REF_NAME
 DEBIAN_FRONTEND=noninteractive
@@ -75,7 +85,7 @@ sudo mkdir -p /mnt/octelium/db
 sudo chmod -R 777 /mnt/octelium/db
 
 
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${K8S_ARCH}/kubectl"
 sudo cp kubectl /usr/local/bin
 sudo chmod 755 /usr/local/bin/kubectl
 
