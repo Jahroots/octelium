@@ -24,6 +24,7 @@ import (
 	"github.com/octelium/octelium/apis/main/corev1"
 	"github.com/octelium/octelium/client/common/cliutils"
 	"github.com/octelium/octelium/pkg/common/pbutils"
+	"github.com/octelium/octelium/pkg/utils/ldflags"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	k8scorev1 "k8s.io/api/core/v1"
@@ -43,6 +44,15 @@ type Opts struct {
 }
 
 func DoInstall(ctx context.Context, o *Opts) error {
+	// Read registry configuration from environment variables
+	if registry := os.Getenv("OCTELIUM_REGISTRY"); registry != "" {
+		ldflags.ImageRegistry = registry
+		zap.L().Debug("Using OCTELIUM_REGISTRY from environment", zap.String("registry", registry))
+	}
+	if imagePrefix := os.Getenv("OCTELIUM_IMAGE_PREFIX"); imagePrefix != "" {
+		ldflags.ImageRegistryPrefix = imagePrefix
+		zap.L().Debug("Using OCTELIUM_IMAGE_PREFIX from environment", zap.String("prefix", imagePrefix))
+	}
 
 	if err := setClusterResources(ctx, o); err != nil {
 		return err
