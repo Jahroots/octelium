@@ -43,6 +43,17 @@ func initComponent(ctx context.Context, opts *initComponentOpts) error {
 		myComponentNS = ComponentNamespaceOctelium
 	}
 
+	// Read image configuration from environment variables
+	if registry := os.Getenv("OCTELIUM_REGISTRY"); registry != "" {
+		ldflags.ImageRegistry = registry
+	}
+	if imagePrefix := os.Getenv("OCTELIUM_IMAGE_PREFIX"); imagePrefix != "" {
+		ldflags.ImageRegistryPrefix = imagePrefix
+	}
+	if version := os.Getenv("OCTELIUM_VERSION"); version != "" {
+		ldflags.ImageVersion = version
+	}
+
 	level := func() zapcore.Level {
 		if ldflags.IsDev() {
 			return zap.DebugLevel
