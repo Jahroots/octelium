@@ -75,6 +75,36 @@ build-portal:
 build-e2e:
 	CGO_ENABLED=0 GOOS=linux go build $(LDFLAGS) -o bin/octelium-e2e github.com/octelium/octelium/cluster/e2e
 
+# Multi-architecture build targets for cluster components (ARM64)
+build-nocturne-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-nocturne-arm64 github.com/octelium/octelium/cluster/nocturne
+build-apiserver-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-apiserver-arm64 github.com/octelium/octelium/cluster/apiserver
+build-genesis-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-genesis-arm64 github.com/octelium/octelium/cluster/genesis
+build-nodeinit-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-nodeinit-arm64 github.com/octelium/octelium/cluster/nodeinit
+build-gwagent-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-gwagent-arm64 github.com/octelium/octelium/cluster/gwagent
+build-dnsserver-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-dnsserver-arm64 github.com/octelium/octelium/cluster/dnsserver
+build-authserver-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-authserver-arm64 github.com/octelium/octelium/cluster/authserver
+build-ingress-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-ingress-arm64 github.com/octelium/octelium/cluster/ingress
+build-rscserver-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-rscserver-arm64 github.com/octelium/octelium/cluster/rscserver
+build-cloudman-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-cloudman-arm64 github.com/octelium/octelium/cluster/cloudman
+build-vigil-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-vigil-arm64 github.com/octelium/octelium/cluster/vigil
+build-octovigil-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-octovigil-arm64 github.com/octelium/octelium/cluster/octovigil
+build-portal-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-portal-arm64 github.com/octelium/octelium/cluster/portal
+build-e2e-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-e2e-arm64 github.com/octelium/octelium/cluster/e2e
+
 build-cli-octelium:
 	CGO_ENABLED=0 go build $(LDFLAGS) -o bin/ github.com/octelium/octelium/client/octelium
 
@@ -85,6 +115,52 @@ build-cli-octops:
 	CGO_ENABLED=0 go build $(LDFLAGS) -o bin/ github.com/octelium/octelium/client/octops
 
 build-cli: build-cli-octelium build-cli-octeliumctl build-cli-octops
+
+# Multi-architecture build targets for CLI components
+build-cli-octelium-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-amd64 github.com/octelium/octelium/client/octelium
+build-cli-octelium-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octelium-arm64 github.com/octelium/octelium/client/octelium
+
+build-cli-octeliumctl-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octeliumctl-amd64 github.com/octelium/octelium/client/octeliumctl
+build-cli-octeliumctl-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octeliumctl-arm64 github.com/octelium/octelium/client/octeliumctl
+
+build-cli-octops-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octops-amd64 github.com/octelium/octelium/client/octops
+build-cli-octops-arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o bin/octops-arm64 github.com/octelium/octelium/client/octops
+
+# Explicit AMD64 build targets for cluster components
+build-nocturne-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-nocturne-amd64 github.com/octelium/octelium/cluster/nocturne
+build-apiserver-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-apiserver-amd64 github.com/octelium/octelium/cluster/apiserver
+build-genesis-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-genesis-amd64 github.com/octelium/octelium/cluster/genesis
+build-nodeinit-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-nodeinit-amd64 github.com/octelium/octelium/cluster/nodeinit
+build-gwagent-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-gwagent-amd64 github.com/octelium/octelium/cluster/gwagent
+build-dnsserver-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-dnsserver-amd64 github.com/octelium/octelium/cluster/dnsserver
+build-authserver-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-authserver-amd64 github.com/octelium/octelium/cluster/authserver
+build-ingress-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-ingress-amd64 github.com/octelium/octelium/cluster/ingress
+build-rscserver-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-rscserver-amd64 github.com/octelium/octelium/cluster/rscserver
+build-cloudman-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-cloudman-amd64 github.com/octelium/octelium/cluster/cloudman
+build-vigil-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-vigil-amd64 github.com/octelium/octelium/cluster/vigil
+build-octovigil-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-octovigil-amd64 github.com/octelium/octelium/cluster/octovigil
+build-portal-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-portal-amd64 github.com/octelium/octelium/cluster/portal
+build-e2e-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o bin/octelium-e2e-amd64 github.com/octelium/octelium/cluster/e2e
 
 install-cli: build-cli
 	mkdir -p ~/go/bin
@@ -176,3 +252,34 @@ tidy:
 	cd cluster/e2e; $(CMD_TIDY)
 set-license:
 	go run unsorted/licenser/main.go
+
+# ============================================================================
+# Multi-Architecture Consolidation Targets
+# ============================================================================
+
+# Build all CLI components for both AMD64 and ARM64 architectures
+build-cli-all-arch: build-cli-octelium-amd64 build-cli-octelium-arm64 \
+                    build-cli-octeliumctl-amd64 build-cli-octeliumctl-arm64 \
+                    build-cli-octops-amd64 build-cli-octops-arm64
+
+# Build all cluster components for both AMD64 and ARM64 architectures
+build-cluster-all-arch: \
+	build-nocturne-amd64 build-nocturne-arm64 \
+	build-apiserver-amd64 build-apiserver-arm64 \
+	build-genesis-amd64 build-genesis-arm64 \
+	build-nodeinit-amd64 build-nodeinit-arm64 \
+	build-gwagent-amd64 build-gwagent-arm64 \
+	build-dnsserver-amd64 build-dnsserver-arm64 \
+	build-authserver-amd64 build-authserver-arm64 \
+	build-ingress-amd64 build-ingress-arm64 \
+	build-rscserver-amd64 build-rscserver-arm64 \
+	build-cloudman-amd64 build-cloudman-arm64 \
+	build-vigil-amd64 build-vigil-arm64 \
+	build-octovigil-amd64 build-octovigil-arm64 \
+	build-portal-amd64 build-portal-arm64 \
+	build-e2e-amd64 build-e2e-arm64
+
+# Build all components for both architectures
+build-all-arch: build-cli-all-arch build-cluster-all-arch
+
+.PHONY: build-cli-all-arch build-cluster-all-arch build-all-arch

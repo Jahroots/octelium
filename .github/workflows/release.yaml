@@ -27,7 +27,17 @@ jobs:
         env:
           GOARCH: ${{matrix.arch}}
           GOOS: ${{matrix.os}}
-        run: make build-cli
+        run: |
+          if [ "${{matrix.os}}" = "windows" ]; then
+            make build-cli
+          else
+            # Build with architecture suffix for Linux/Darwin
+            make build-cli-octelium-${{matrix.arch}} build-cli-octeliumctl-${{matrix.arch}} build-cli-octops-${{matrix.arch}}
+            # Rename to standard naming
+            mv bin/octelium-${{matrix.arch}} bin/octelium
+            mv bin/octeliumctl-${{matrix.arch}} bin/octeliumctl
+            mv bin/octops-${{matrix.arch}} bin/octops
+          fi
       - name: Tarball
         if: ${{ matrix.os != 'windows' }}
         run: |

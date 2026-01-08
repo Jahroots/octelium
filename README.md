@@ -118,6 +118,20 @@ For Windows in Powershell
 iwr https://octelium.com/install.ps1 -useb | iex
 ```
 
+### Supported Architectures
+
+Octelium supports both **AMD64 (x86-64)** and **ARM64 (aarch64)** architectures:
+
+- **AMD64**: Intel and AMD processors
+- **ARM64**: Apple Silicon (M1/M2/M3+), AWS Graviton, Azure Ampere, and other ARM64-based systems
+
+Pre-built binaries are available for:
+- **Linux**: AMD64, ARM64
+- **macOS**: AMD64, ARM64 (Apple Silicon)
+- **Windows**: AMD64
+
+Visit the [releases page](https://github.com/octelium/octelium/releases) to download the appropriate binary for your platform and architecture. Docker images are also available for both architectures via `ghcr.io/octelium/`.
+
 ## Useful Links
 
 - [What is Octelium?](https://octelium.com/docs/octelium/latest/overview/intro)
