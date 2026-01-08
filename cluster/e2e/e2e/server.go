@@ -91,7 +91,7 @@ func initServer(ctx context.Context) (*server, error) {
 
 	containerImage := os.Getenv("OCTELIUM_CONTAINER_IMAGE")
 	if containerImage == "" {
-		containerImage = "ghcr.io/jahroots/octelium:0.0.7-arm64-test"
+		containerImage = "ghcr.io/jahroots/octelium:0.0.8-arm64-test"
 	}
 
 	ret := &server{

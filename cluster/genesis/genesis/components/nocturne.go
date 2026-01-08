@@ -77,7 +77,7 @@ func getNocturneDeployment(o *CommonOpts) *appsv1.Deployment {
 								ret := []k8scorev1.EnvVar{
 									{
 										Name:  "OCTELIUM_REGION_NAME",
-										Value: o.Region.Metada23s         Normal    Killing                pod/octelium-gwagent-d76sw                                      Container gwagent failed liveness probe, will be restartedta.Name,
+										Value: o.Region.Metadata.Name,
 									},
 									{
 										Name:  "OCTELIUM_REGION_UID",
